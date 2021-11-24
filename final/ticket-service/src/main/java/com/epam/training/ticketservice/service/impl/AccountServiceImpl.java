@@ -28,12 +28,18 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Optional<AccountDto> signUp(@NonNull String username, @NonNull String password) {
+        if (accountRepository.findByUsername(username).isPresent()) {
+            return Optional.empty();
+        }
         Account account = new Account(username, password, Account.Role.USER);
         return Optional.of(accountToAccountDto(accountRepository.save(account)));
     }
 
     @Override
     public Optional<AccountDto> signUpPrivileged(@NonNull String username, @NonNull String password) {
+        if (accountRepository.findByUsername(username).isPresent()) {
+            return Optional.empty();
+        }
         Account account = new Account(username, password, Account.Role.ADMIN);
         return Optional.of(accountToAccountDto(accountRepository.save(account)));
     }
