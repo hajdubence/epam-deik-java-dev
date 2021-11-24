@@ -29,13 +29,13 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Optional<AccountDto> signUp(@NonNull String username, @NonNull String password) {
         Account account = new Account(username, password, Account.Role.USER);
-        return Optional.ofNullable(accountToAccountDto(accountRepository.save(account)));
+        return Optional.of(accountToAccountDto(accountRepository.save(account)));
     }
 
     @Override
     public Optional<AccountDto> signUpPrivileged(@NonNull String username, @NonNull String password) {
         Account account = new Account(username, password, Account.Role.ADMIN);
-        return Optional.ofNullable(accountToAccountDto(accountRepository.save(account)));
+        return Optional.of(accountToAccountDto(accountRepository.save(account)));
     }
 
     @Override

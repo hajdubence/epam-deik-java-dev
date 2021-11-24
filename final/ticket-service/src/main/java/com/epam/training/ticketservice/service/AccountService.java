@@ -1,18 +1,19 @@
 package com.epam.training.ticketservice.service;
 
 import com.epam.training.ticketservice.service.model.AccountDto;
+import lombok.NonNull;
 
 import java.util.Optional;
 
 public interface AccountService {
 
-    Optional<AccountDto> signUp(String username, String password);
+    Optional<AccountDto> signUp(@NonNull String username, @NonNull String password);
 
-    Optional<AccountDto> signUpPrivileged(String username, String password);
+    Optional<AccountDto> signUpPrivileged(@NonNull String username, @NonNull String password);
 
-    Optional<AccountDto> signIn(String username, String password);
+    Optional<AccountDto> signIn(@NonNull String username, @NonNull String password);
 
-    Optional<AccountDto> signInPrivileged(String username, String password);
+    Optional<AccountDto> signInPrivileged(@NonNull String username, @NonNull String password);
 
     Optional<AccountDto> signOut();
 

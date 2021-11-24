@@ -5,6 +5,6 @@ import lombok.Value;
 
 @Value
 public class AccountDto {
-    private final String username;
-    private final Account.Role role;
+    String username;
+    Account.Role role;
 }
