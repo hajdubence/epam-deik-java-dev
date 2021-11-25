@@ -1,7 +1,6 @@
 package com.epam.training.ticketservice.ui.command;
 
 import com.epam.training.ticketservice.service.RoomService;
-import com.epam.training.ticketservice.service.model.MovieDto;
 import com.epam.training.ticketservice.service.model.RoomDto;
 import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;
@@ -58,7 +57,7 @@ public class RoomCommand {
         return roomDtoList
                 .stream()
                 .map(roomDto -> String.format("Room %s with %d seats, %d rows and %d columns",
-                        roomDto.getName(), roomDto.getRows()*roomDto.getCols(), roomDto.getRows(), roomDto.getCols()))
+                        roomDto.getName(), roomDto.getRows() * roomDto.getCols(), roomDto.getRows(), roomDto.getCols()))
                 .collect(Collectors.joining("\n"));
     }
 
