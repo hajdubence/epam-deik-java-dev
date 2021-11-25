@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
 import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import java.util.Set;
+import javax.persistence.Entity;
 
 @Data
 @NoArgsConstructor
@@ -19,6 +17,4 @@ public class Room extends BaseEntity {
     private String name;
     private int rows;
     private int cols;
-    @OneToMany
-    private Set<Screening> screenings;
 }

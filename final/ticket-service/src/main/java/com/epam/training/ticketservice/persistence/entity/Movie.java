@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
 import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import java.util.Set;
+import javax.persistence.Entity;
 
 @Data
 @NoArgsConstructor
@@ -19,6 +17,4 @@ public class Movie extends BaseEntity {
     private String title;
     private String genre;
     private int length;
-    @OneToMany
-    private Set<Screening> screenings;
 }

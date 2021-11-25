@@ -1,40 +1,64 @@
 package com.epam.training.ticketservice.ui.command;
 
+import com.epam.training.ticketservice.service.MovieService;
+import com.epam.training.ticketservice.service.model.MovieDto;
 import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellMethodAvailability;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @ShellComponent
 public class MovieCommand {
 
     private final CommandAvailability commandAvailability;
+    private final MovieService movieService;
 
-    public MovieCommand(CommandAvailability commandAvailability) {
+    public MovieCommand(CommandAvailability commandAvailability, MovieService movieService) {
         this.commandAvailability = commandAvailability;
+        this.movieService = movieService;
     }
 
     @ShellMethodAvailability("isAdmin")
     @ShellMethod(key = "create movie", value = "Creates a movie")
     public String create(String title, String genre, int length) {
-        return "create movie <film címe> <műfaj> <vetítés hossza percben>";
+        if (movieService.create(title, genre, length).isEmpty()) {
+            return "Fail";
+        }
+        return "Success";
     }
 
     @ShellMethodAvailability("isAdmin")
     @ShellMethod(key = "update movie", value = "Updates a movie")
     public String update(String title, String genre, int length) {
-        return "update movie <film címe> <műfaj> <vetítés hossza percben>";
+        if (movieService.update(title, genre, length).isEmpty()) {
+            return "Fail";
+        }
+        return "Success";
     }
 
     @ShellMethodAvailability("isAdmin")
     @ShellMethod(key = "delete movie", value = "Deletes a movie")
     public String delete(String title) {
-        return "delete movie <film címe>";
+        if (movieService.delete(title).isEmpty()) {
+            return "Fail";
+        }
+        return "Success";
     }
 
     @ShellMethod(key = "list movies", value = "Lists all movies")
     public String list() {
-        return "There are no movies at the moment";
+        List<MovieDto> movieDtoList = movieService.list();
+        if (movieDtoList.isEmpty()) {
+            return "There are no movies at the moment";
+        }
+        return movieDtoList
+                .stream()
+                .map(movieDto -> String.format("%s (%s, %d minutes)",
+                        movieDto.getTitle(), movieDto.getGenre(), movieDto.getLength()))
+                .collect(Collectors.joining("\n"));
     }
 
     private Availability isAdmin() {
