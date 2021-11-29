@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class AccountServiceImpl implements AccountService {
 
-    private AccountDto signedInUser = null;
+    private AccountDto signedInAccount = null;
     private final AccountRepository accountRepository;
 
     @Autowired
@@ -21,8 +21,8 @@ public class AccountServiceImpl implements AccountService {
         this.accountRepository = accountRepository;
     }
 
-    AccountServiceImpl(AccountDto signedInUser, AccountRepository accountRepository) {
-        this.signedInUser = signedInUser;
+    AccountServiceImpl(AccountDto signedInAccount, AccountRepository accountRepository) {
+        this.signedInAccount = signedInAccount;
         this.accountRepository = accountRepository;
     }
 
@@ -51,8 +51,8 @@ public class AccountServiceImpl implements AccountService {
         if (optionalAccount.isEmpty()) {
             return Optional.empty();
         }
-        signedInUser = accountToAccountDto(optionalAccount.get());
-        return getSignedInUser();
+        signedInAccount = accountToAccountDto(optionalAccount.get());
+        return getSignedInAccount();
     }
 
     @Override
@@ -62,20 +62,20 @@ public class AccountServiceImpl implements AccountService {
         if (optionalAccount.isEmpty()) {
             return Optional.empty();
         }
-        signedInUser = accountToAccountDto(optionalAccount.get());
-        return getSignedInUser();
+        signedInAccount = accountToAccountDto(optionalAccount.get());
+        return getSignedInAccount();
     }
 
     @Override
     public Optional<AccountDto> signOut() {
-        Optional<AccountDto> previouslySignedInUser = getSignedInUser();
-        signedInUser = null;
+        Optional<AccountDto> previouslySignedInUser = getSignedInAccount();
+        signedInAccount = null;
         return previouslySignedInUser;
     }
 
     @Override
-    public Optional<AccountDto> getSignedInUser() {
-        return Optional.ofNullable(signedInUser);
+    public Optional<AccountDto> getSignedInAccount() {
+        return Optional.ofNullable(signedInAccount);
     }
 
     private AccountDto accountToAccountDto(Account account) {

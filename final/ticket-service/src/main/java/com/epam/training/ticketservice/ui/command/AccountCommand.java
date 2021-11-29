@@ -36,7 +36,7 @@ public class AccountCommand {
 
     @ShellMethod(key = "describe account", value = "Account information")
     public String describeAccount() {
-        Optional<AccountDto> account = accountService.getSignedInUser();
+        Optional<AccountDto> account = accountService.getSignedInAccount();
         if (account.isEmpty()) {
             return "You are not signed in";
         }

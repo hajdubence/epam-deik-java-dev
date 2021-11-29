@@ -18,7 +18,7 @@ public class CommandAvailability {
     }
 
     public Availability isAdmin() {
-        Optional<AccountDto> optionalAccountDto = accountService.getSignedInUser();
+        Optional<AccountDto> optionalAccountDto = accountService.getSignedInAccount();
         if (optionalAccountDto.isEmpty()) {
             return Availability.unavailable("You are not signed in");
         }

@@ -17,5 +17,6 @@ public interface AccountService {
 
     Optional<AccountDto> signOut();
 
-    Optional<AccountDto> getSignedInUser();
+    Optional<AccountDto> getSignedInAccount();
+
 }
