@@ -2,7 +2,6 @@ package com.epam.training.ticketservice.ui.command;
 
 import com.epam.training.ticketservice.service.MovieService;
 import com.epam.training.ticketservice.service.model.MovieDto;
-import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellMethodAvailability;
@@ -11,13 +10,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ShellComponent
-public class MovieCommand {
+public class MovieCommand extends CommandAvailability {
 
-    private final CommandAvailability commandAvailability;
     private final MovieService movieService;
 
-    public MovieCommand(CommandAvailability commandAvailability, MovieService movieService) {
-        this.commandAvailability = commandAvailability;
+    public MovieCommand(MovieService movieService) {
         this.movieService = movieService;
     }
 
@@ -61,7 +58,4 @@ public class MovieCommand {
                 .collect(Collectors.joining("\n"));
     }
 
-    private Availability isAdmin() {
-        return commandAvailability.isAdmin();
-    }
 }

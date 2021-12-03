@@ -3,19 +3,17 @@ package com.epam.training.ticketservice.ui.command;
 import com.epam.training.ticketservice.persistence.entity.Account;
 import com.epam.training.ticketservice.service.AccountService;
 import com.epam.training.ticketservice.service.model.AccountDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.Availability;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
-public class CommandAvailability {
+public abstract class CommandAvailability {
 
-    private final AccountService accountService;
-
-    public CommandAvailability(AccountService accountService) {
-        this.accountService = accountService;
-    }
+    @Autowired
+    private AccountService accountService;
 
     public Availability isAdmin() {
         Optional<AccountDto> optionalAccountDto = accountService.getSignedInAccount();

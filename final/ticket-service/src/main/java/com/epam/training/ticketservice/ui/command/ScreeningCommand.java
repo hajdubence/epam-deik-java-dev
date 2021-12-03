@@ -14,14 +14,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ShellComponent
-public class ScreeningCommand {
+public class ScreeningCommand extends CommandAvailability {
 
-    private final CommandAvailability commandAvailability;
     private final ScreeningService screeningService;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public ScreeningCommand(CommandAvailability commandAvailability, ScreeningService screeningService) {
-        this.commandAvailability = commandAvailability;
+    public ScreeningCommand(ScreeningService screeningService) {
         this.screeningService = screeningService;
     }
 
@@ -74,7 +72,4 @@ public class ScreeningCommand {
                 .collect(Collectors.joining("\n"));
     }
 
-    private Availability isAdmin() {
-        return commandAvailability.isAdmin();
-    }
 }

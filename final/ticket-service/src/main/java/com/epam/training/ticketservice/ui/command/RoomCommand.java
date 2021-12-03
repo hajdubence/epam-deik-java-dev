@@ -2,7 +2,6 @@ package com.epam.training.ticketservice.ui.command;
 
 import com.epam.training.ticketservice.service.RoomService;
 import com.epam.training.ticketservice.service.model.RoomDto;
-import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellMethodAvailability;
@@ -11,13 +10,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ShellComponent
-public class RoomCommand {
+public class RoomCommand extends CommandAvailability {
 
-    private final CommandAvailability commandAvailability;
     private final RoomService roomService;
 
-    public RoomCommand(CommandAvailability commandAvailability, RoomService roomService) {
-        this.commandAvailability = commandAvailability;
+    public RoomCommand(RoomService roomService) {
         this.roomService = roomService;
     }
 
@@ -61,7 +58,4 @@ public class RoomCommand {
                 .collect(Collectors.joining("\n"));
     }
 
-    private Availability isAdmin() {
-        return commandAvailability.isAdmin();
-    }
 }
