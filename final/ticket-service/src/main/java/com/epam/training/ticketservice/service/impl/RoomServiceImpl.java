@@ -27,7 +27,7 @@ public class RoomServiceImpl implements RoomService {
         }
         Room room = new Room(name, rows, cols);
         roomRepository.save(room);
-        return Optional.of(roomToRoomDto(room));
+        return Optional.of(new RoomDto(room));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class RoomServiceImpl implements RoomService {
         room.setRows(rows);
         room.setCols(cols);
         roomRepository.save(room);
-        return Optional.of(roomToRoomDto(room));
+        return Optional.of(new RoomDto(room));
     }
 
     @Override
@@ -51,21 +51,15 @@ public class RoomServiceImpl implements RoomService {
         }
         Room room = optionalRoom.get();
         roomRepository.delete(room);
-        return Optional.of(roomToRoomDto(room));
+        return Optional.of(new RoomDto(room));
     }
 
     @Override
     public List<RoomDto> list() {
         return roomRepository.findAll()
                 .stream()
-                .map(this::roomToRoomDto)
+                .map(RoomDto::new)
                 .collect(Collectors.toList());
     }
 
-    private RoomDto roomToRoomDto(Room room) {
-        if (room == null) {
-            return null;
-        }
-        return new RoomDto(room.getName(), room.getRows(), room.getCols());
-    }
 }

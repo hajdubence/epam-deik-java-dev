@@ -27,7 +27,7 @@ public class MovieServiceImpl implements MovieService {
         }
         Movie movie = new Movie(title, genre, length);
         movieRepository.save(movie);
-        return Optional.of(movieToMovieDto(movie));
+        return Optional.of(new MovieDto(movie));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class MovieServiceImpl implements MovieService {
         movie.setGenre(genre);
         movie.setLength(length);
         movieRepository.save(movie);
-        return Optional.of(movieToMovieDto(movie));
+        return Optional.of(new MovieDto(movie));
     }
 
     @Override
@@ -51,21 +51,15 @@ public class MovieServiceImpl implements MovieService {
         }
         Movie movie = optionalMovie.get();
         movieRepository.delete(movie);
-        return Optional.of(movieToMovieDto(movie));
+        return Optional.of(new MovieDto(movie));
     }
 
     @Override
     public List<MovieDto> list() {
         return movieRepository.findAll()
                 .stream()
-                .map(this::movieToMovieDto)
+                .map(MovieDto::new)
                 .collect(Collectors.toList());
     }
 
-    private MovieDto movieToMovieDto(Movie movie) {
-        if (movie == null) {
-            return null;
-        }
-        return new MovieDto(movie.getTitle(), movie.getGenre(), movie.getLength());
-    }
 }

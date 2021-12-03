@@ -22,7 +22,7 @@ public class CommandAvailability {
         if (optionalAccountDto.isEmpty()) {
             return Availability.unavailable("You are not signed in");
         }
-        if (optionalAccountDto.get().getRole() == Account.Role.ADMIN) {
+        if (optionalAccountDto.get().getRole() == AccountDto.Role.ADMIN) {
             return Availability.available();
         }
         return Availability.unavailable("You dont have permissions");

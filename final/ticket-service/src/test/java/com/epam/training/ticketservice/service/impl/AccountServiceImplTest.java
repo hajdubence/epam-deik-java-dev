@@ -3,6 +3,7 @@ package com.epam.training.ticketservice.service.impl;
 import com.epam.training.ticketservice.persistence.entity.Account;
 import com.epam.training.ticketservice.persistence.repository.AccountRepository;
 import com.epam.training.ticketservice.service.model.AccountDto;
+import org.h2.engine.User;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -16,7 +17,7 @@ class AccountServiceImplTest {
 
     private final AccountRepository accountRepository = mock(AccountRepository.class);
     private final AccountServiceImpl underTest = new AccountServiceImpl(accountRepository);
-    private final AccountDto signedInAccountDto = new AccountDto("username", Account.Role.USER);
+    private final AccountDto signedInAccountDto = new AccountDto("username", AccountDto.Role.USER);
     private final AccountServiceImpl underTest2 = new AccountServiceImpl(signedInAccountDto, accountRepository);
 
     @Test
@@ -33,7 +34,7 @@ class AccountServiceImplTest {
 
     @Test
     void signUpShouldReturnAccountDtoWhenUsernameIsAvailable() {
-        AccountDto accountDto = new AccountDto("username", Account.Role.USER);
+        AccountDto accountDto = new AccountDto("username", AccountDto.Role.USER);
         Optional<AccountDto> expected = Optional.of(accountDto);
         when(accountRepository.findByUsername("username")).thenReturn(Optional.empty());
         Account account = new Account("username", "password", Account.Role.USER);
@@ -60,7 +61,7 @@ class AccountServiceImplTest {
 
     @Test
     void signUpPrivilegedShouldReturnAccountDtoWhenUsernameIsAvailable() {
-        AccountDto accountDto = new AccountDto("username", Account.Role.ADMIN);
+        AccountDto accountDto = new AccountDto("username", AccountDto.Role.ADMIN);
         Optional<AccountDto> expected = Optional.of(accountDto);
         when(accountRepository.findByUsername("username")).thenReturn(Optional.empty());
         Account account = new Account("username", "password", Account.Role.ADMIN);
@@ -87,7 +88,7 @@ class AccountServiceImplTest {
 
     @Test
     void signInShouldReturnAccountDtoWhenUsernameAndPasswordAreCorrect() {
-        AccountDto accountDto = new AccountDto("username", Account.Role.USER);
+        AccountDto accountDto = new AccountDto("username", AccountDto.Role.USER);
         Optional<AccountDto> expected = Optional.of(accountDto);
         Account account = new Account("username", "password", Account.Role.USER);
         when(accountRepository.findByUsernameAndPasswordAndRole("username", "password", Account.Role.USER))
@@ -113,7 +114,7 @@ class AccountServiceImplTest {
 
     @Test
     void signInPrivilegedShouldReturnAccountDtoWhenUsernameAndPasswordAreCorrect() {
-        AccountDto accountDto = new AccountDto("username", Account.Role.ADMIN);
+        AccountDto accountDto = new AccountDto("username", AccountDto.Role.ADMIN);
         Optional<AccountDto> expected = Optional.of(accountDto);
         Account account = new Account("username", "password", Account.Role.ADMIN);
         when(accountRepository.findByUsernameAndPasswordAndRole("username", "password", Account.Role.ADMIN))

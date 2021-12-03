@@ -48,7 +48,7 @@ public class ScreeningServiceImpl implements ScreeningService {
                 .findByRoom(screening.getRoom())
                 .forEach(screening2 -> checkOverlaps(screening, screening2));
         screeningRepository.save(screening);
-        return Optional.of(screeningToScreeningDto(screening));
+        return Optional.of(new ScreeningDto(screening));
     }
 
     @Override
@@ -60,37 +60,15 @@ public class ScreeningServiceImpl implements ScreeningService {
             return Optional.empty();
         }
         screeningRepository.delete(optionalScreening.get());
-        return Optional.of(screeningToScreeningDto(optionalScreening.get()));
+        return Optional.of(new ScreeningDto(optionalScreening.get()));
     }
 
     @Override
     public List<ScreeningDto> list() {
         return screeningRepository.findAll()
                 .stream()
-                .map(this::screeningToScreeningDto)
+                .map(ScreeningDto::new)
                 .collect(Collectors.toList());
-    }
-
-    private MovieDto movieToMovieDto(Movie movie) {
-        if (movie == null) {
-            return null;
-        }
-        return new MovieDto(movie.getTitle(), movie.getGenre(), movie.getLength());
-    }
-
-    private RoomDto roomToRoomDto(Room room) {
-        if (room == null) {
-            return null;
-        }
-        return new RoomDto(room.getName(), room.getRows(), room.getCols());
-    }
-
-    private ScreeningDto screeningToScreeningDto(Screening screening) {
-        if (screening == null) {
-            return null;
-        }
-        return new ScreeningDto(movieToMovieDto(screening.getMovie()),
-                roomToRoomDto(screening.getRoom()), screening.getStartTime());
     }
 
     private void checkOverlaps(Screening s1, Screening s2) {

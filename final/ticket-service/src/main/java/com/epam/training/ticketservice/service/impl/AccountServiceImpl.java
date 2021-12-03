@@ -32,7 +32,7 @@ public class AccountServiceImpl implements AccountService {
             return Optional.empty();
         }
         Account account = new Account(username, password, Account.Role.USER);
-        return Optional.of(accountToAccountDto(accountRepository.save(account)));
+        return Optional.of(new AccountDto(accountRepository.save(account)));
     }
 
     @Override
@@ -41,7 +41,7 @@ public class AccountServiceImpl implements AccountService {
             return Optional.empty();
         }
         Account account = new Account(username, password, Account.Role.ADMIN);
-        return Optional.of(accountToAccountDto(accountRepository.save(account)));
+        return Optional.of(new AccountDto(accountRepository.save(account)));
     }
 
     @Override
@@ -51,7 +51,7 @@ public class AccountServiceImpl implements AccountService {
         if (optionalAccount.isEmpty()) {
             return Optional.empty();
         }
-        signedInAccount = accountToAccountDto(optionalAccount.get());
+        signedInAccount = new AccountDto(optionalAccount.get());
         return getSignedInAccount();
     }
 
@@ -62,7 +62,7 @@ public class AccountServiceImpl implements AccountService {
         if (optionalAccount.isEmpty()) {
             return Optional.empty();
         }
-        signedInAccount = accountToAccountDto(optionalAccount.get());
+        signedInAccount = new AccountDto(optionalAccount.get());
         return getSignedInAccount();
     }
 
@@ -76,13 +76,6 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Optional<AccountDto> getSignedInAccount() {
         return Optional.ofNullable(signedInAccount);
-    }
-
-    private AccountDto accountToAccountDto(Account account) {
-        if (account == null) {
-            return null;
-        }
-        return new AccountDto(account.getUsername(), account.getRole());
     }
 
 }
