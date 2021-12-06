@@ -3,7 +3,6 @@ package com.epam.training.ticketservice.service.impl;
 import com.epam.training.ticketservice.persistence.entity.Account;
 import com.epam.training.ticketservice.persistence.repository.AccountRepository;
 import com.epam.training.ticketservice.service.model.AccountDto;
-import org.h2.engine.User;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;

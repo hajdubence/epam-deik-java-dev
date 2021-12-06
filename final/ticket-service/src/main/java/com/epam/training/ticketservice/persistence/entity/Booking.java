@@ -5,18 +5,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import java.time.LocalDateTime;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Screening extends BaseEntity {
+public class Booking extends BaseEntity {
 
     @ManyToOne
-    private Movie movie;
+    Account account;
     @ManyToOne
-    private Room room;
-    private LocalDateTime startTime;
+    Screening screening;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "booking")
+    List<Seat> seats;
+    int price;
 }

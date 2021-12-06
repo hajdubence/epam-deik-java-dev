@@ -1,6 +1,5 @@
 package com.epam.training.ticketservice.ui.command;
 
-import com.epam.training.ticketservice.persistence.entity.Account;
 import com.epam.training.ticketservice.service.AccountService;
 import com.epam.training.ticketservice.service.model.AccountDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,4 +24,16 @@ public abstract class CommandAvailability {
         }
         return Availability.unavailable("You dont have permissions");
     }
+
+    public Availability isUser() {
+        Optional<AccountDto> optionalAccountDto = accountService.getSignedInAccount();
+        if (optionalAccountDto.isEmpty()) {
+            return Availability.unavailable("You are not signed in");
+        }
+        if (optionalAccountDto.get().getRole() == AccountDto.Role.USER) {
+            return Availability.available();
+        }
+        return Availability.unavailable("You dont have permissions");
+    }
+
 }

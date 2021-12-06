@@ -3,7 +3,6 @@ package com.epam.training.ticketservice.service.model;
 import com.epam.training.ticketservice.persistence.entity.Account;
 import lombok.AllArgsConstructor;
 import lombok.Value;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Value
 @AllArgsConstructor

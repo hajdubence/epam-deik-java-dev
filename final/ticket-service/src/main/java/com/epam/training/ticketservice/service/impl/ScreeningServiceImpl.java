@@ -7,8 +7,6 @@ import com.epam.training.ticketservice.persistence.repository.MovieRepository;
 import com.epam.training.ticketservice.persistence.repository.RoomRepository;
 import com.epam.training.ticketservice.persistence.repository.ScreeningRepository;
 import com.epam.training.ticketservice.service.ScreeningService;
-import com.epam.training.ticketservice.service.model.MovieDto;
-import com.epam.training.ticketservice.service.model.RoomDto;
 import com.epam.training.ticketservice.service.model.ScreeningDto;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
@@ -82,4 +80,5 @@ public class ScreeningServiceImpl implements ScreeningService {
                     + " after another screening in this room");
         }
     }
+
 }
