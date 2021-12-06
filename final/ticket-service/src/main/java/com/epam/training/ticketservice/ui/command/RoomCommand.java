@@ -22,27 +22,27 @@ public class RoomCommand extends CommandAvailability {
     @ShellMethod(key = "create room", value = "Creates a room")
     public String create(String name, int rows, int cols) {
         if (roomService.create(name, rows, cols).isEmpty()) {
-            return "Fail";
+            return "Room already exists";
         }
-        return "Success";
+        return "Room created";
     }
 
     @ShellMethodAvailability("isAdmin")
     @ShellMethod(key = "update room", value = "Updates a room")
     public String update(String name, int rows, int cols) {
         if (roomService.update(name, rows, cols).isEmpty()) {
-            return "Fail";
+            return "Room does not exist";
         }
-        return "Success";
+        return "Room updated";
     }
 
     @ShellMethodAvailability("isAdmin")
     @ShellMethod(key = "delete room", value = "Deletes a room")
     public String delete(String name) {
         if (roomService.delete(name).isEmpty()) {
-            return "Fail";
+            return "Room does not exist";
         }
-        return "Success";
+        return "Room deleted";
     }
 
     @ShellMethod(key = "list rooms", value = "Lists all rooms")

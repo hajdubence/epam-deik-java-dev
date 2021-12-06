@@ -22,27 +22,27 @@ public class MovieCommand extends CommandAvailability {
     @ShellMethod(key = "create movie", value = "Creates a movie")
     public String create(String title, String genre, int length) {
         if (movieService.create(title, genre, length).isEmpty()) {
-            return "Fail";
+            return "Movie already exists";
         }
-        return "Success";
+        return "Movie created";
     }
 
     @ShellMethodAvailability("isAdmin")
     @ShellMethod(key = "update movie", value = "Updates a movie")
     public String update(String title, String genre, int length) {
         if (movieService.update(title, genre, length).isEmpty()) {
-            return "Fail";
+            return "Movie does not exist";
         }
-        return "Success";
+        return "Movie updated";
     }
 
     @ShellMethodAvailability("isAdmin")
     @ShellMethod(key = "delete movie", value = "Deletes a movie")
     public String delete(String title) {
         if (movieService.delete(title).isEmpty()) {
-            return "Fail";
+            return "Movie does not exist";
         }
-        return "Success";
+        return "Movie deleted";
     }
 
     @ShellMethod(key = "list movies", value = "Lists all movies")

@@ -29,11 +29,11 @@ public class ScreeningCommand extends CommandAvailability {
         try {
             startTime = LocalDateTime.parse(start, formatter);
         } catch (DateTimeParseException e) {
-            return "Parse fail YYYY-MM-DD hh:mm";
+            return "Failed to parse the start, please use YYYY-MM-DD hh:mm format";
         }
         try {
             if (screeningService.create(movieTitle, roomName, startTime).isPresent()) {
-                return "Success";
+                return "Screening created";
             }
         } catch (IllegalArgumentException e) {
             return e.getMessage();
@@ -48,10 +48,10 @@ public class ScreeningCommand extends CommandAvailability {
         try {
             startTime = LocalDateTime.parse(start, formatter);
         } catch (DateTimeParseException e) {
-            return "Parse fail YYYY-MM-DD hh:mm";
+            return "Failed to parse the start, please use YYYY-MM-DD hh:mm format";
         }
         if (screeningService.delete(movieTitle, roomName, startTime).isPresent()) {
-            return "Success";
+            return "Screening deleted";
         }
         return "Fail";
     }

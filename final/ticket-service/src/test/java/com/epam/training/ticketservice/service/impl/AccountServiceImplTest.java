@@ -144,7 +144,7 @@ class AccountServiceImplTest {
     }
 
     @Test
-    void getSignedInAccountShouldReturnOptionalEmptyWhenThereIsNoOneSignedIn() {
+    void getSignedInAccountShouldReturnOptionalEmptyWhenNotSignedIn() {
         Optional<AccountDto> expected = Optional.empty();
 
         Optional<AccountDto> actual = underTest.getSignedInAccount();
@@ -153,7 +153,7 @@ class AccountServiceImplTest {
     }
 
     @Test
-    void getSignedInAccountShouldReturnAccountDtoOfTheTheSignedInAccount() {
+    void getSignedInAccountShouldReturnAccountDtoOfTheTheSignedInAccountWhenSignedIn() {
         Optional<AccountDto> expected = Optional.of(signedInAccountDto);
 
         Optional<AccountDto> actual = underTest2.getSignedInAccount();
