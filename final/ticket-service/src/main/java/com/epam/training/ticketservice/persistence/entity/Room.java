@@ -15,6 +15,7 @@ public class Room extends BaseEntity {
 
     @Column(unique = true)
     private String name;
+    @Column(name = "rows_")
     private int rows;
     private int cols;
 }
